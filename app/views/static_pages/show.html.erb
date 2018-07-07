@@ -1,0 +1,10 @@
+<% provide(:title, "All Reviews") %>
+<h1>All Reviews</h1>
+<hr/>
+<% for i in @reviews do %>
+  Manner: <%= i.manner.manner %><br/>
+  Star: <%= i.star %><br/>
+  Text: <%= i.text %><br/>
+  Posted by: <%= i.user.name %>
+  <hr/>
+<% end %>
