@@ -1,10 +1,39 @@
-<% provide(:title, "All Reviews") %>
-<h1>All Reviews</h1>
+<% provide(:title, "Show Reviews") %>
+<h1>Show Reviews</h1>
+
+<h2> 
+  <% if @current_manner.nil? %>
+    All
+  <% else %>
+    <%= @current_manner.manner %>
+    <br/><div class="showstar" score=<%= @average %>></div>
+  <% end %>
+</h2>
+
+<% for m in @manners do %>
+  <%= link_to '#'+m.manner, show_reviews_path(manner_id: m.id) %>
+  <br/>
+<% end %>
+
 <hr/>
 <% for i in @reviews do %>
-  Manner: <%= i.manner.manner %><br/>
-  Star: <%= i.star %><br/>
-  Text: <%= i.text %><br/>
-  Posted by: <%= i.user.name %>
+  <h3>Manner: <%= i.manner.manner %></h3>
+  <div class="showstar" score=<%= i.star %>></div>
+  <%= i.text %><br/><br/>
+  <%= i.updated_at %>, Reviewed by <%= i.user.name %>
   <hr/>
 <% end %>
+<script>
+  $(function(){
+    $('.showstar').raty({
+      readOnly: true,
+      score: function(){
+        return $(this).attr('score')
+      },
+      size : 36,
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn: '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>'
+    });
+  })
+</script>

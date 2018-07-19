@@ -14,17 +14,30 @@
         options_user.push [i.name, i.id]
       end
     %>
-    <%= form_for(@review, url: review_path) do |f|%>
+    <%= form_for(@review, url: review_path) do |f| %>
       <%= f.label :user_id, "投稿するユーザ" %>
       <%= f.select :user_id, options_user%>
       <%= f.label :manner_id, "レビュー対象マナー" %>
       <%= f.select :manner_id, options_manner %>
-      <%= f.label :star, " ★ " %>
-      <%= f.select :star, [[1, 1],[2, 2],[3, 3],[4, 4],[5, 5]] %>
-      <%= f.label :text, "詳細" %>
+      <br/>
+      <div class="field" id="star" class="form-controll">
+        <%= f.label :star, " 評価 " %>
+        <br/>
+        <%= f.hidden_field :star, id: :star%>
+      </div>
+      <br/>
+      <%= f.label :text, "理由" %>
       <%= f.text_field :text, class:'form-controll' %>
-
-      <%= f.submit "送信", class: "btn btn-primary" %>
+      <br/>
+      <%= f.submit "送信", class: "btn btn-success" %>
     <% end %>
+    <script>
+      $('#star').raty({
+        size : 36,
+        starOff: '<%= asset_path('star-off.png') %>',
+        starOn: '<%= asset_path('star-on.png') %>',
+        scoreName: 'review[star]'
+      });
+    </script>
   </div>
 </div>

@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.create!(name: "聖徳太子")
+User.create!(name: "いもむし")
+User.create!(name: "松尾芭蕉")
+
+Manner.create!(manner: "お辞儀ハンコ")
+Manner.create!(manner: "細かすぎるビジネス敬語")
+Manner.create!(manner: "上座・下座などの席次")
